@@ -5,27 +5,28 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.util.*;
 
-public class userCertDAO {
+public class userTestDAO {
 	Connection con;
 	PreparedStatement ps;
 	ResultSet rs;
 	
 	public void insertDB(userInfo user) {
-		String sql = "INSERT into cert_user"
-				+ " (u_id, c_name, c_date)"
-				+ " values (?,?,?)";
+		String sql = "INSERT into TEST_GRADE"
+				+ " (u_id, T_name, T_grade, T_date)"
+				+ " values (?,?,?,?)";
 		
 		try {
 			con = DBCon.getCon();
 			
 			ps = con.prepareStatement(sql);
 			ps.setString(1, user.getId());
-			ps.setString(2, user.getCname());
-			ps.setString(3, user.getCdate());
+			ps.setString(2, user.getTname());
+			ps.setString(3, user.getGrade());
+			ps.setString(4, user.getTdate());
 			ps.executeUpdate();
 			
 		}catch (Exception e) {
-			System.out.println("cert_user insert 오류");
+			System.out.println("test_grade insert 오류");
 		
 		}finally {
 			DBCon.close(con,ps,rs);
@@ -33,10 +34,10 @@ public class userCertDAO {
 		
 	}
 	
-	public userInfo readDB(String userid, String cname) {
+	public userInfo readDB(String userid, String tname) {
 		userInfo user = new userInfo();
 		
-		String sql = "select U_ID, C_NAME, To_Char(C_date,'yy/MM/dd') from CERT_USER where U_ID = '" + userid + "' and C_NAME = '" + cname + "'";
+		String sql = "select U_ID, T_NAME, T_GRADE, To_Char(T_date,'yy/MM/dd') from TEST_GRADE where U_ID = '" + userid + "' and T_NAME = '" + tname + "'";
 		
 		try {
 			con = DBCon.getCon();
@@ -45,12 +46,13 @@ public class userCertDAO {
 			
 			if (rs.next()) {
 				user.setId(rs.getString("U_ID"));
-				user.setCname(rs.getString("C_NAME"));
-				user.setCdate(rs.getString("To_Char(C_date,'yy/MM/dd')"));
+				user.setTname(rs.getString("T_NAME"));
+				user.setGrade(rs.getString("T_GRADE"));
+				user.setTdate(rs.getString("To_Char(T_date,'yy/MM/dd')"));
 			}
 			
 		}catch (Exception e) {
-			System.out.println("cert_user 읽기 오류");
+			System.out.println("test_grade 읽기 오류");
 			
 		}finally {
 			DBCon.close(con, ps, rs);
@@ -61,7 +63,7 @@ public class userCertDAO {
 	public List<userInfo> readAllDB(String userid) {
 		ArrayList<userInfo> list = new ArrayList<userInfo>();
 		
-		String sql = "select U_ID, C_NAME, To_Char(C_date,'yy/MM/dd') from CERT_USER where U_ID = '" + userid + "'";
+		String sql = "select U_ID, T_NAME, T_GRADE, To_Char(T_date,'yy/MM/dd') from TEST_GRADE where U_ID = '" + userid + "'";
 		
 		try {
 			con = DBCon.getCon();
@@ -71,8 +73,9 @@ public class userCertDAO {
 			while (rs.next()) {
 				userInfo user = new userInfo();
 				user.setId(rs.getString("U_ID"));
-				user.setCname(rs.getString("C_NAME"));
-				user.setCdate(rs.getString("To_Char(C_date,'yy/MM/dd')"));
+				user.setTname(rs.getString("T_NAME"));
+				user.setGrade(rs.getString("T_GRADE"));
+				user.setTdate(rs.getString("To_Char(T_date,'yy/MM/dd')"));
 				list.add(user);
 			}
 		

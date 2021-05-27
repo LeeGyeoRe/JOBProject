@@ -1,14 +1,12 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "Info.userInfo" %>
-<%@ page import = "Info.userCertDAO" %>
+<%@ page import = "Info.userSchDAO" %>
 <%@ page import = "java.util.*" %>
 
 <% 
-userCertDAO udao = new userCertDAO();
-Object s_id = session.getAttribute("user_id");
-
-List<userInfo> userlist = udao.readAllDB((String)s_id); 
+userSchDAO udao = new userSchDAO();
+List<userInfo> userlist = udao.readAllDB(); 
 %>
 	
 <style>
@@ -27,11 +25,14 @@ th:nth-child(2n+1) {background-color : rgba(00,57,66,.2);}
 </style>
 
 <table>
-<tr> <th>ID</th> <th>자격명</th> <th>취득일</th> </tr>
+<tr> <th>학교명</th> <th>ID</th> <th>전공</th> <th>학점</th> <th>최종학력</th> <th>졸업일</th> </tr>
 <% for (int i=0;i<userlist.size();i++) {
 	userInfo user = (userInfo)userlist.get(i);
-	out.print("<tr> <td>" + user.getId() + "</td>");
+	out.print("<tr> <td>" + user.getName() + "</td>");
+	out.print("<td>" + user.getId() + "</td>");
+	out.print("<td>" + user.getMajor() + "</td>");
+	out.print("<td>" + user.getGrade() + "</td>");
 	out.print("<td>" + user.getCname() + "</td>");
-	out.print("<td>" + user.getCdate() + "</td>");
+	out.print("<td>" + user.getDate() + "</td>");
 } %>
 </table>

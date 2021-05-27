@@ -12,6 +12,11 @@ public class userInfo {
 	private String date;
 	private String cname;
 	private String cdate;
+	private String tname;
+	private String tdate;
+	private String grade;
+	private String major;
+	private String edu;
 	
 	public userInfo() {}
 	
@@ -101,6 +106,46 @@ public class userInfo {
 
 	public void setCdate(String cdate) {
 		this.cdate = cdate;
+	}
+
+	public String getTname() {
+		return tname;
+	}
+
+	public void setTname(String tname) {
+		this.tname = tname;
+	}
+
+	public String getTdate() {
+		return tdate;
+	}
+
+	public void setTdate(String tdate) {
+		this.tdate = tdate;
+	}
+
+	public String getGrade() {
+		return grade;
+	}
+
+	public void setGrade(String grade) {
+		this.grade = grade;
+	}
+
+	public String getMajor() {
+		return major;
+	}
+
+	public void setMajor(String major) {
+		this.major = major;
+	}
+
+	public String getEdu() {
+		return edu;
+	}
+
+	public void setEdu(String edu) {
+		this.edu = edu;
 	}
 
 }

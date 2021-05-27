@@ -6,12 +6,11 @@
 <% 
 userCertDAO userdao = new userCertDAO();
 Object s_id = session.getAttribute("user_id");
-Object c_name = session.getAttribute("cname");
-
 session.setAttribute("user_id", s_id);
-session.setAttribute("cname", c_name);
 
-userInfo user = userdao.readDB((String)s_id, (String)c_name);
+String cname = request.getParameter("cn");
+
+userInfo user = userdao.readDB((String)s_id, cname);
 %>
 
 <style>

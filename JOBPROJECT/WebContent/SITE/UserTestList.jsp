@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import = "Info.userInfo" %>
-<%@ page import = "Info.userCertDAO" %>
+<%@ page import = "Info.userTestDAO" %>
 <%@ page import = "java.util.*" %>
 
 <% 
-userCertDAO udao = new userCertDAO();
+userTestDAO udao = new userTestDAO();
 Object s_id = session.getAttribute("user_id");
 
 List<userInfo> userlist = udao.readAllDB((String)s_id); 
@@ -27,11 +27,12 @@ th:nth-child(2n+1) {background-color : rgba(00,57,66,.2);}
 </style>
 
 <table>
-<tr> <th>ID</th> <th>자격명</th> <th>취득일</th> </tr>
+<tr> <th>ID</th> <th>시험명</th> <th>점수</th> <th>시험일</th> </tr>
 <% for (int i=0;i<userlist.size();i++) {
 	userInfo user = (userInfo)userlist.get(i);
 	out.print("<tr> <td>" + user.getId() + "</td>");
-	out.print("<td>" + user.getCname() + "</td>");
-	out.print("<td>" + user.getCdate() + "</td>");
+	out.print("<td>" + user.getTname() + "</td>");
+	out.print("<td>" + user.getGrade() + "</td>");
+	out.print("<td>" + user.getTdate() + "</td>");
 } %>
 </table>

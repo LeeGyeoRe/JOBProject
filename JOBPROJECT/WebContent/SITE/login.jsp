@@ -14,8 +14,9 @@ if(pw.equals(user.getPw())) {
 	session.setAttribute("user_id", user.getId());
 	session.setAttribute("target", "home");
 	
-}else
+}else {
 	request.setAttribute("target", "LoginForm");
+}
 %>
 
 <jsp:forward page = "template.jsp"/>
